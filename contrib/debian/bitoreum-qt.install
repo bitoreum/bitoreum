@@ -1,0 +1,6 @@
+usr/local/bin/bitoreum-qt usr/bin
+share/pixmaps/bitoreum32.xpm usr/share/pixmaps
+share/pixmaps/bitoreum16.xpm usr/share/pixmaps
+share/pixmaps/bitoreum128.png usr/share/pixmaps
+debian/bitoreum-qt.desktop usr/share/applications
+debian/bitoreum-qt.protocol usr/share/kde4/services/
