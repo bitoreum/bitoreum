@@ -1,13 +1,11 @@
 Bitoreum Core 
 ===========================
 
-Bitoreum is now a code fork of Dash and inherits current and optionally future features such as chain locks, oracles etc. We are further expanding capabilities by adding the following features:
-A)	The deployment of a unique asset layer.
-B)	The option to lock X amount of coins or assets into a special transaction. Coins are unlocked at a block number of choice or timestamp.
-C)	Trustless on chain transfers of assets and native coins VIA Smart Contracts.
-D)	Integrating, developing and deploying a VM protocol that would allow for smart contracts in 4 major programming languages as opposed to the situation with Ethereum being limited to solidity.
+Bitoreum is now a code fork of Raptoreum which was a fork of Dash and inherits current and optionally future features such as chain locks, oracles etc. We are further expanding capabilities by adding the following features:
 
-These additional features open up the power and ease of use of Bitoreum’s features to a greater variety of industries under the Distributed Application umbrella. DAPP's are a critical part of driving widespread adoption as recently seen with DEFI and Bitoreum hopes to help provide further alternatives and possibilities for DAPP developers particularly in the field of opening up new programming languages for DAPP and contract development.
+-Payment gateway for online stores as plugin - ready2go
+-Wallet with exchange option
+-Tools for gamers (screensaver as miner) when the computer is idle, it start earning Bitoreum.
 
 It is one of our goals to not only innovate ideas for Bitoreum but to contribute back to the general crypto community with open-source features that anybody can use to help their Blockchain projects succeed.
 
@@ -22,7 +20,7 @@ Development Process
 -------------------
 
 The `master` branch is meant to be stable. Development is done in separate branches.
-[Tags](https://github.com/bugahost/bitoreum/tags) are created to indicate new official,
+[Tags](https://github.com/bitoreum/bitoreum/tags) are created to indicate new official,
 stable release versions of Bitoreum Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
