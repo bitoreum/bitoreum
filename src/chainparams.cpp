@@ -506,7 +506,7 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.nPowDGWHeight = 60;
         consensus.DGWBlocksAvg = 60;
-        consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
+        consensus.nRuleChangeActivationThreshold = 1512; // 75% of 2016
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
         consensus.smartnodePaymentFixedBlock = 6800;
         consensus.nFutureForkBlock = 9999999;
