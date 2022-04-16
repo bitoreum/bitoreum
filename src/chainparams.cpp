@@ -500,7 +500,7 @@ public:
         consensus.DIP0008Enabled = true;
         // consensus.DIP0003EnforcementHeight = 1047200;
         consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Bitoreum: 1 day
+        consensus.nPowTargetTimespan = 3 * 60 * 60; // Bitoreum: 3 hours
         consensus.nPowTargetSpacing = 2 * 60; // Bitoreum: 2 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
