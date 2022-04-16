@@ -111,10 +111,10 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const Consens
 	// NOTE: is this accurate? nActualTimespan counts it for (nPastBlocks - 1) blocks only...
 	int64_t nTargetTimespan = nPastBlocks * params.nPowTargetSpacing;
 
-	if (nActualTimespan < nTargetTimespan/3)
-		nActualTimespan = nTargetTimespan/3;
-	if (nActualTimespan > nTargetTimespan*3)
-		nActualTimespan = nTargetTimespan*3;
+	if (nActualTimespan < nTargetTimespan/4)
+		nActualTimespan = nTargetTimespan/4;
+	if (nActualTimespan > nTargetTimespan*4)
+		nActualTimespan = nTargetTimespan*4;
 
 	// Retarget
 	bnNew *= nActualTimespan;
