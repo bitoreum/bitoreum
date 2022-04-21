@@ -524,10 +524,10 @@ public:
 
         // The best chain should have at least this much work.
         //consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000c2a6d13d4138"); // 0
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // 0
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000016de5bd8eb1"); // 0
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x40e5b20023ae263fa2e62d8c6c7111aab7d2743851045a226525c6e32492c227"); // 0
+        consensus.defaultAssumeValid = uint256S("0xfe3f71d712fb0f1f70de2c9f6a230204bfe317ce5b32db9c9b0b171e49dbb902"); // 0
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -622,14 +622,17 @@ public:
         fBIP9CheckSmartnodesUpgraded = true;
 
         checkpointData = {
-          {  {0, uint256S("0x3f590e1339dfd2a738315700c2d9d0b44075d27fb488d4846283d3d65e462e03")} }
+          {  
+		  {0, uint256S("0x3f590e1339dfd2a738315700c2d9d0b44075d27fb488d4846283d3d65e462e03")} 
+		  {10827, uint256S("0xfe3f71d712fb0f1f70de2c9f6a230204bfe317ce5b32db9c9b0b171e49dbb902")}
+	  }
 	};
 
         chainTxData = ChainTxData{
-          1648947907,   // * UNIX timestamp of last known number of transactions (Block 0)
-              0,   // * total number of transactions between genesis and that timestamp
+          1650578456,   // * UNIX timestamp of last known number of transactions (Block 0)
+              26536,   // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-              0    // * estimated number of transactions per second after that timestamp
+              0.018    // * estimated number of transactions per second after that timestamp
         };
     }
 };
