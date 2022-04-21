@@ -1,0 +1,25 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="ar">locale/bitoreum_ar.qm</file>
+        <file alias="bg">locale/bitoreum_bg.qm</file>
+        <file alias="de">locale/bitoreum_de.qm</file>
+        <file alias="en">locale/bitoreum_en.qm</file>
+        <file alias="es">locale/bitoreum_es.qm</file>
+        <file alias="fi">locale/bitoreum_fi.qm</file>
+        <file alias="fr">locale/bitoreum_fr.qm</file>
+        <file alias="it">locale/bitoreum_it.qm</file>
+        <file alias="ja">locale/bitoreum_ja.qm</file>
+        <file alias="ko">locale/bitoreum_ko.qm</file>
+        <file alias="nl">locale/bitoreum_nl.qm</file>
+        <file alias="pl">locale/bitoreum_pl.qm</file>
+        <file alias="pt">locale/bitoreum_pt.qm</file>
+        <file alias="ro">locale/bitoreum_ro.qm</file>
+        <file alias="ru">locale/bitoreum_ru.qm</file>
+        <file alias="sk">locale/bitoreum_sk.qm</file>
+        <file alias="th">locale/bitoreum_th.qm</file>
+        <file alias="tr">locale/bitoreum_tr.qm</file>
+        <file alias="vi">locale/bitoreum_vi.qm</file>
+        <file alias="zh_CN">locale/bitoreum_zh_CN.qm</file>
+        <file alias="zh_TW">locale/bitoreum_zh_TW.qm</file>
+    </qresource>
+</RCC>
