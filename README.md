@@ -1,25 +1,39 @@
-Bitoreum Core staging tree 0.17
+Bitoreum Core v2.5
 ===========================
 
-|CI|master|develop|
-|-|-|-|
+What is Bitoreum?
 
-The name Bitoreum is derived from the Victoria term for a bird of prey and ium/eum place for a pertaining to in this case birds of prey. The name comes from the team’s extensive experience in the security field with top level skills covering all aspects of it. This is a unique strength in the crypto community and will leverage well into a successful project.
+Bitoreum is a decentralized financial technology accessible to everyone that is fast, reliable and
+secure with negligible transaction costs. Bitoreum has its own blockchain, which is a fork of
+Raptoreum codebase with ASIC resistant POW algorithm and consensus ensuring Smartnodes
+which make the network immune to 51% attacks. Bitoreum coins can be mined on both CPU
+and GPU. Bitoreum cares about privacy and has an integrated CoinJoin mechanism that allows
+to hide the balance directly in the wallet.
 
-Introduction
-Bitoreum began as the fairly simple idea, introducing smart contracts which would allow on chain, trustless transfers (goodbye centralized marketplaces) on the Ravencoin codebase, however with the automation of assets and BTM (Bitoreum).
-The project has quickly evolved, adding innovative features that not only further expand the asset layer, but also introduce features that could help other Blockchain projects. Ravencoin unfortunately suffered several serious breaches of its asset layer so that code base has been abandoned by us. We are currently working with and building on Bitoreum code expending its capabilities significantly.
+Problems Bitoreum attempts to solve
 
-Bitoreum is now a code fork of Dash and inherits current and optionally future features such as chain locks, oracles etc. We are further expanding capabilities by adding the following features:
-A)	The deployment of a unique asset layer.
-B)	The option to lock X amount of coins or assets into a special transaction. Coins are unlocked at a block number of choice or timestamp.
-C)	Trustless on chain transfers of assets and native coins VIA Smart Contracts.
-D)	Integrating, developing and deploying a VM protocol that would allow for smart contracts in 4 major programming languages as opposed to the situation with Ethereum being limited to solidity.
+Bitoreum is a transparent and scalable financial system that aims to make cryptocurrencies
+accessible to everyone. There are four main directions in which we want to contribute.
 
-These additional features open up the power and ease of use of Bitoreum’s features to a greater variety of industries under the Distributed Application umbrella. DAPP's are a critical part of driving widespread adoption as recently seen with DEFI and Bitoreum hopes to help provide further alternatives and possibilities for DAPP developers particularly in the field of opening up new programming languages for DAPP and contract development.
+1. Make managing BTRM easy for everyone by deploying mobile wallets for the major
+mobile OS, such as Android and IOS.
 
-It is one of our goals to not only innovate ideas for Bitoreum but to contribute back to the general crypto community with open-source features that anybody can use to help their Blockchain projects succeed.
+2. Promote the adoption of cryptocurrencies by offering a payment gateway service. The
+service will provide a free plugin for small businesses to facilitate online transactions in
+cryptocurrency. Customers will be able to pay for goods and services in BTRM, while an
+entrepreneur will receive fiat money to his/her credit card.
 
+3. We think that all cryptocurrencies deserve to have access to the investors and to be
+tradable at an exchange. To achieve this goal we want to remove entry barriers in the form
+of high exchange listing fees and to offer everyone Bitroeum Exchange with its own
+blockchain, where all coins interested in listing can be traded against Bitroeum.
+
+4. We believe that everyone should be able to get a part of the financial pie with high returns
+that is usually accessible only to rich investors. That is why everyone can earn coins with
+modest initial investment by deploying Smartnodes and contributing to the blockchain
+stability and security.
+
+The roadmap to our goals can be found at our official webpage https://bitoreum.org/
 
 License
 -------
