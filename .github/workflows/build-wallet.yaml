@@ -23,8 +23,8 @@ jobs:
           echo "checking out $GITHUB_REF trigger by $GITHUB_EVENT_NAME"
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Read build.properties key for master
-        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master'}}
+      - name: Read build.properties key for main
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main'}}
         id: release-version
         uses: christian-draeger/read-properties@1.0.1
         with:
@@ -38,7 +38,7 @@ jobs:
           path: build.properties
           property: 'snapshot-version'
       - name: create version
-        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master'}}
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main'}}
         run: |
           echo "BUILD_VERSION=${{ steps.release-version.outputs.value }}" > version.txt
       - name: create snapshot version
