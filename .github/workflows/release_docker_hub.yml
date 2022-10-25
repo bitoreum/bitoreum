@@ -25,12 +25,11 @@ jobs:
         key: ${{ runner.os }}-buildx-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-buildx-
-
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
     - name: Docker meta
       id: docker_meta
@@ -46,7 +45,6 @@ jobs:
           type=raw,value=latest-dev,enable=${{ contains(github.event.release.tag_name, '-rc') }}
         flavor: |
           latest=false
-
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2
@@ -68,6 +66,5 @@ jobs:
       run: |
         rm -rf /tmp/.buildx-cache
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
