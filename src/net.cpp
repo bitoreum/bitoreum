@@ -1342,10 +1342,10 @@ void CConnman::DisconnectNodes()
                 }
 
                 if (fLogIPs) {
-                    LogPrintf("ThreadSocketHandler -- removing node: peer=%d addr=%s nRefCount=%d fInbound=%d m_smartnode_connection=%d m_smartnode_iqr_connection=%d\n",
+                    LogPrintf("Ping Pong -- Network update: peer=%d addr=%s nRefCount=%d fInbound=%d m_smartnode_connection=%d m_smartnode_iqr_connection=%d\n",
                           pnode->GetId(), pnode->addr.ToString(), pnode->GetRefCount(), pnode->fInbound, pnode->m_smartnode_connection, pnode->m_smartnode_iqr_connection);
                 } else {
-                    LogPrintf("ThreadSocketHandler -- removing node: peer=%d nRefCount=%d fInbound=%d m_smartnode_connection=%d m_smartnode_iqr_connection=%d\n",
+                    LogPrintf("Pong Ping -- Network update: peer=%d nRefCount=%d fInbound=%d m_smartnode_connection=%d m_smartnode_iqr_connection=%d\n",
                           pnode->GetId(), pnode->GetRefCount(), pnode->fInbound, pnode->m_smartnode_connection, pnode->m_smartnode_iqr_connection);
                 }
 
@@ -2117,7 +2117,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "Bitoreum Core " + FormatFullVersion();
+        std::string strDesc = "Bitoreum Network Core " + FormatFullVersion();
 
         do {
 #ifndef UPNPDISCOVER_SUCCESS
@@ -2210,7 +2210,7 @@ void CConnman::ThreadDNSAddressSeed()
             nRelevant += pnode->fSuccessfullyConnected && !pnode->fFeeler && !pnode->fOneShot && !pnode->m_manual_connection && !pnode->fInbound && !pnode->m_smartnode_probe_connection;
         }
         if (nRelevant >= 2) {
-            LogPrintf("P2P peers available. Skipped DNS seeding.\n");
+            LogPrintf("P2P available, Yey I don't need DNS seeding.\n");
             return;
         }
     }
@@ -2651,17 +2651,7 @@ void CConnman::ThreadOpenSmartnodeConnections()
 
         CDeterministicMNCPtr connectToDmn;
         bool isProbe = false;
-//        { // don't hold lock while calling OpenSmartnodeConnection as cs_main is locked deep inside
-//            LOCK2(cs_vNodes, cs_vPendingSmartnodes);
-//
-//            if (!vPendingSmartnodes.empty()) {
-//                auto dmn = mnList.GetValidMN(vPendingSmartnodes.front());
-//                vPendingSmartnodes.erase(vPendingSmartnodes.begin());
-//                if (dmn && !connectedNodes.count(dmn->pdmnState->addr) && !IsSmartnodeOrDisconnectRequested(dmn->pdmnState->addr)) {
-//                    connectToDmn = dmn;
-//                    LogPrint(BCLog::NET_NETCONN, "CConnman::%s -- opening pending smartnode connection to %s, service=%s\n", __func__, dmn->proTxHash.ToString(), dmn->pdmnState->addr.ToString(false));
-// Added by BTM:
-  {
+        {
             LOCK(cs_main); // Lock cs_main first to avoid deadlocks (it is recursively locked deeper)
             LOCK2(cs_vNodes, cs_vPendingSmartnodes);
 
@@ -2671,8 +2661,6 @@ void CConnman::ThreadOpenSmartnodeConnections()
                 if (dmn && !connectedNodes.count(dmn->pdmnState->addr) && !IsSmartnodeOrDisconnectRequested(dmn->pdmnState->addr)) {
                     connectToDmn = dmn;
                     LogPrint(BCLog::NET_NETCONN, "CConnman::%s -- opening pending smartnode connection to %s, service=%s\n", __func__, dmn->proTxHash.ToString(), dmn->pdmnState->addr.ToString(false));
-
-// END by BTM
                 }
             }
 
@@ -2930,7 +2918,7 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. %s is probably already running."), addrBind.ToString(), _(PACKAGE_NAME));
+            strError = strprintf(_("Unable to bind to %s on this computer. %s is allready started."), addrBind.ToString(), _(PACKAGE_NAME));
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %s)"), addrBind.ToString(), NetworkErrorString(nErr));
         LogPrintf("%s\n", strError);

@@ -20,7 +20,7 @@
       <string notr="true">QLabel { font-style:italic; }</string>
      </property>
      <property name="text">
-      <string>Bug Thoughts Community prowdly presents %1.</string>
+      <string>Welcome to %1.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

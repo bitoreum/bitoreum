@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITOREUM_CRYPTO_BLS_WORKER_H
-#define BITOREUM_CRYPTO_BLS_WORKER_H
+#ifndef _B_I_T_O_R_E_U_M__CRYPTO_BLS_WORKER_H
+#define _B_I_T_O_R_E_U_M__CRYPTO_BLS_WORKER_H
 
 #include <bls/bls.h>
 
@@ -203,4 +203,4 @@ private:
     }
 };
 
-#endif //BITOREUM_CRYPTO_BLS_WORKER_H
+#endif //_B_I_T_O_R_E_U_M__CRYPTO_BLS_WORKER_H

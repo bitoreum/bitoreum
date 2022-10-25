@@ -6,6 +6,8 @@
 #ifndef BITCOIN_CHAIN_H
 #define BITCOIN_CHAIN_H
 
+#include <atomic>
+
 #include <arith_uint256.h>
 #include <consensus/params.h>
 #include <primitives/block.h>
@@ -442,6 +444,7 @@ public:
 class CChain {
 private:
     std::vector<CBlockIndex*> vChain;
+    std::atomic<size_t> atomicHeight;
 
 public:
     /** Returns the index entry for the genesis block of this chain, or nullptr if none. */
@@ -483,6 +486,11 @@ public:
     /** Return the maximal height in the chain. Is equal to chain.Tip() ? chain.Tip()->nHeight : -1. */
     int Height() const {
         return vChain.size() - 1;
+    }
+
+    /** Return the Height - no lock required */
+    int AtomicHeight() const {
+        return atomicHeight;
     }
 
     /** Set/initialize a chain with a given tip. */

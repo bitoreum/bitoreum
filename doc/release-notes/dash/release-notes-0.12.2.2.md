@@ -173,7 +173,7 @@ See detailed [change log](https://github.com/bitoreum/bitoreum/compare/v0.12.2.1
 ### Network/Sync:
 - [`5d58dd90c`](https://github.com/bitoreum/bitoreum/commit/5d58dd90c) Make sure to clear setAskFor in Bitoreum submodules (#1730)
 - [`328009749`](https://github.com/bitoreum/bitoreum/commit/328009749) fine-tune sync conditions in getblocktemplate (#1739)
-- [`362becbcc`](https://github.com/bitoreum/bitoreum/commit/362becbcc) Bump MIN_PEER_PROTO_VERSION to 70208 (#1772)
+- [`362becbcc`](https://github.com/bitoreum/bitoreum/commit/362becbcc) Bump OLD_MIN_PEER_PROTO_VERSION to 70208 (#1772)
 - [`930afd7df`](https://github.com/bitoreum/bitoreum/commit/930afd7df) Fix mnp and mnv invs (#1775)
 - [`63e306148`](https://github.com/bitoreum/bitoreum/commit/63e306148) Improve sync (#1779)
 - [`a79c97248`](https://github.com/bitoreum/bitoreum/commit/a79c97248) Fix ProcessVerifyBroadcast (#1780)

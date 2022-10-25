@@ -10017,7 +10017,7 @@
       "ownerAddress": "RSktjvPXnG7YHkWz8ceJmurnMW91CNxed2",
       "votingAddress": "RYYbDCuEXzGgA9qB3oxiNUF5J32GJtufHJ",
       "payoutAddress": "RVx8qBxnYKf2hc1trbnTCibMPrj2Z4J3Pd",
-      "pubKeyOperator": "94dbd452ab013b072074467d03af704800eaecefe475c7e46381702e7fabc433e4339f0afcbd3a391f5b414a15693ab1"
+      "pubKeyOperator": "94dbd452ab013b072074467d03af704800eaecefe475c7e46387772e7fabc433e4339f0afcbd3a391f5b414a15693ab1"
     },
     "confirmations": 14883,
     "wallet": {
@@ -13920,7 +13920,7 @@
     }
   }, 
   {
-    "proTxHash": "33c04a603c733a9a93b18756817098c74073c9aa26958defb065aadc40c3939d",
+    "proTxHash": "33c04a603c733a9a93b18756877798c74073c9aa26958defb065aadc40c3939d",
     "collateralHash": "47c35dd1045c0111ba6a8b127143598aca54bc67b79f5168a59f33ae40daa50a",
     "collateralIndex": 1,
     "collateralAddress": "RJxQLuRqCecngzrwyDhN1v3tFFtgLtRss5",

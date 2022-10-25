@@ -195,8 +195,7 @@ UniValue getblockcount(const JSONRPCRequest& request)
             + HelpExampleRpc("getblockcount", "")
         );
 
-    LOCK(cs_main);
-    return chainActive.Height();
+    return chainActive.AtomicHeight();
 }
 
 UniValue getbestblockhash(const JSONRPCRequest& request)
@@ -1433,12 +1432,20 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
             + HelpExampleRpc("getblockchaininfo", "")
         );
 
-    LOCK(cs_main);
-
-    std::string strChainName = gArgs.IsArgSet("-devnet") ? gArgs.GetDevNetName() : Params().NetworkIDString();
-
     UniValue obj(UniValue::VOBJ);
-    obj.pushKV("chain",                 strChainName);
+    std::string strChainName = gArgs.IsArgSet("-devnet") ? gArgs.GetDevNetName() : Params().NetworkIDString();
+    obj.pushKV("chain", strChainName);
+
+    if (fProcessingHeaders)
+    {
+        // We don't want to wait a long time for processing headers, just give out some basic information without a lock
+        obj.pushKV("blocks",  chainActive.AtomicHeight());
+        obj.pushKV("headers", atomicHeaderHeight);
+        obj.pushKV("warnings", GetWarnings("statusbar"));
+        return obj;
+    }
+
+    LOCK(cs_main);
     obj.pushKV("blocks",                (int)chainActive.Height());
     obj.pushKV("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1);
     obj.pushKV("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex());
@@ -1467,16 +1474,16 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     }
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    CBlockIndex* tip = chainActive.Tip();
+    // CBlockIndex* tip = chainActive.Tip();
     UniValue softforks(UniValue::VARR);
     UniValue bip9_softforks(UniValue::VOBJ);
     // sorted by activation block
     // softforks.push_back(SoftForkDesc("bip34", 2, tip, consensusParams));
     // softforks.push_back(SoftForkDesc("bip66", 3, tip, consensusParams));
     // softforks.push_back(SoftForkDesc("bip65", 4, tip, consensusParams));
-    // for (int pos = Consensus::DEPLOYMENT_CSV; pos != Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++pos) {
-    //     BIP9SoftForkDescPushBack(bip9_softforks, consensusParams, static_cast<Consensus::DeploymentPos>(pos));
-    // }
+     for (int pos = Consensus::DEPLOYMENT_V17; pos != Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++pos) {
+         BIP9SoftForkDescPushBack(bip9_softforks, consensusParams, static_cast<Consensus::DeploymentPos>(pos));
+     }
     obj.pushKV("softforks",             softforks);
     obj.pushKV("bip9_softforks", bip9_softforks);
 
@@ -2001,6 +2008,7 @@ static UniValue getblockstats(const JSONRPCRequest& request)
     std::vector<CAmount> fee_array;
     std::vector<CAmount> feerate_array;
     std::vector<int64_t> txsize_array;
+    bool isV17active = Params().IsFutureActive(chainActive.Tip());
 
     for (const auto& tx : block.vtx) {
         outputs += tx->vout.size();
@@ -2052,7 +2060,7 @@ static UniValue getblockstats(const JSONRPCRequest& request)
             }
 
             CAmount txfee = tx_total_in - tx_total_out;
-            assert(MoneyRange(txfee));
+            assert(MoneyRange(txfee, isV17active));
             if (do_medianfee) {
                 fee_array.push_back(txfee);
             }

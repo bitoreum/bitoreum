@@ -8,8 +8,8 @@
  *      Author: tri
  */
 
-#ifndef BITOREUM_SELECTION_H_
-#define BITOREUM_SELECTION_H_
+#ifndef _B_I_T_O_R_E_U_M__SELECTION_H_
+#define _B_I_T_O_R_E_U_M__SELECTION_H_
 
 #include <uint256.h>
 #include <string>
@@ -90,4 +90,4 @@ protected:
 
 };
 
-#endif /* BITOREUM_SELECTION_H_ */
+#endif /* _B_I_T_O_R_E_U_M__SELECTION_H_ */

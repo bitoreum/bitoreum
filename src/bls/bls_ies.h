@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITOREUM_CRYPTO_BLS_IES_H
-#define BITOREUM_CRYPTO_BLS_IES_H
+#ifndef _B_I_T_O_R_E_U_M__CRYPTO_BLS_IES_H
+#define _B_I_T_O_R_E_U_M__CRYPTO_BLS_IES_H
 
 #include <bls/bls.h>
 #include <streams.h>
@@ -167,4 +167,4 @@ public:
     }
 };
 
-#endif // BITOREUM_CRYPTO_BLS_IES_H
+#endif // _B_I_T_O_R_E_U_M__CRYPTO_BLS_IES_H

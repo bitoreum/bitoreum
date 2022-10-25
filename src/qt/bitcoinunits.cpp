@@ -7,6 +7,7 @@
 #include <qt/bitcoinunits.h>
 #include <chainparams.h>
 #include <primitives/transaction.h>
+#include <validation.h>
 
 #include <QSettings>
 #include <QStringList>
@@ -20,9 +21,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTM);
-    unitlist.append(mBTM);
-    unitlist.append(uBTM);
+    unitlist.append(BTRM);
+    unitlist.append(mBTRM);
+    unitlist.append(uBTRM);
     unitlist.append(ruffs);
     return unitlist;
 }
@@ -31,9 +32,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTM:
-    case mBTM:
-    case uBTM:
+    case BTRM:
+    case mBTRM:
+    case uBTRM:
     case ruffs:
         return true;
     default:
@@ -47,9 +48,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case BTM: return QString("BTM");
-            case mBTM: return QString("mBTM");
-            case uBTM: return QString::fromUtf8("μBTM");
+            case BTRM: return QString("BTRM");
+            case mBTRM: return QString("mBTRM");
+            case uBTRM: return QString::fromUtf8("μBTRM");
             case ruffs: return QString("ruffs");
             default: return QString("???");
         }
@@ -58,9 +59,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case BTM: return QString("tBTM");
-            case mBTM: return QString("mtBTM");
-            case uBTM: return QString::fromUtf8("μtBTM");
+            case BTRM: return QString("tBTRM");
+            case mBTRM: return QString("mtBTRM");
+            case uBTRM: return QString::fromUtf8("μtBTRM");
             case ruffs: return QString("truffs");
             default: return QString("???");
         }
@@ -73,9 +74,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case BTM: return QString("Bitoreum");
-            case mBTM: return QString("Milli-Bitoreum (1 / 1" THIN_SP_UTF8 "000)");
-            case uBTM: return QString("Micro-Bitoreum (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case BTRM: return QString("Bitoreum");
+            case mBTRM: return QString("Milli-Bitoreum (1 / 1" THIN_SP_UTF8 "000)");
+            case uBTRM: return QString("Micro-Bitoreum (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             case ruffs: return QString("Ten Nano-Bitoreum (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
@@ -84,9 +85,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case BTM: return QString("TestBitoreums");
-            case mBTM: return QString("Milli-TestBitoreum (1 / 1" THIN_SP_UTF8 "000)");
-            case uBTM: return QString("Micro-TestBitoreum (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case BTRM: return QString("TestBitoreums");
+            case mBTRM: return QString("Milli-TestBitoreum (1 / 1" THIN_SP_UTF8 "000)");
+            case uBTRM: return QString("Micro-TestBitoreum (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             case ruffs: return QString("Ten Nano-TestBitoreum (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
@@ -97,9 +98,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTM:  return 100000000;
-    case mBTM: return 100000;
-    case uBTM: return 100;
+    case BTRM:  return 100000000;
+    case mBTRM: return 100000;
+    case uBTRM: return 100;
     case ruffs: return 1;
     default:   return 100000000;
     }
@@ -109,9 +110,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTM: return 8;
-    case mBTM: return 5;
-    case uBTM: return 2;
+    case BTRM: return 8;
+    case mBTRM: return 5;
+    case uBTRM: return 2;
     case ruffs: return 0;
     default: return 0;
     }
@@ -271,5 +272,9 @@ QVariant BitcoinUnits::data(const int &row, int role) const
 
 CAmount BitcoinUnits::maxMoney()
 {
-    return MAX_MONEY;
+    if(Params().IsFutureActive(chainActive.Tip())){
+        return MAX_MONEY;    
+    }else{
+        return OLD_MAX_MONEY;  
+    }
 }

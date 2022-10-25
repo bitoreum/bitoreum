@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 The Bitoreum developer
+ * Copyright (c) 2020 The bitoreum developer
  * Distributed under the MIT software license, see the accompanying
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.
  * 

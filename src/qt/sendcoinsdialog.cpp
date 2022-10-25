@@ -24,6 +24,7 @@
 #include <wallet/fees.h>
 #include <wallet/wallet.h>
 #include <future/fee.h>
+#include <validation.h>
 
 #include <QFontMetrics>
 #include <QScrollBar>
@@ -237,7 +238,7 @@ void SendCoinsDialog::OnDisplay() {
     for (int i = 0; i < ui->entries->count(); ++i) {
         SendCoinsEntry *entry = qobject_cast<SendCoinsEntry*>(ui->entries->itemAt(i)->widget());
         if(entry) {
-            entry->SetFutureVisible(sporkManager.IsSporkActive(SPORK_22_SPECIAL_TX_FEE) && i == 0);
+            entry->SetFutureVisible(sporkManager.IsSporkActive(SPORK_22_SPECIAL_TX_FEE) && Params().IsFutureActive(chainActive.Tip()) && i == 0);
         }
     }
 }
@@ -352,21 +353,21 @@ void SendCoinsDialog::send(QList<SendCoinsRecipient> recipients)
         //std::cout << rcp.amount << " is future output " << rcp.isFutureOutput << "\n";
         if(rcp.isFutureOutput) {
             hasFuture = true;
-            if(recipients[0].maturity > 0) {
+            if(recipients[0].maturity >= 0) {
                 recipientElement.append(tr("<br>Confirmations in: <b>%1 blocks</b><br />").arg(recipients[0].maturity));
             }
-            if(recipients[0].locktime > 0) {
+            if(recipients[0].locktime >= 0) {
                 recipientElement.append(tr("Time in: <b>%1 seconds from first confirmed</b><br />")
                                                 .arg(recipients[0].locktime));
             }
-            if(recipients[0].maturity > 0 && recipients[0].locktime > 0) {
+            if(recipients[0].maturity >= 0 && recipients[0].locktime >= 0) {
                 int calcBlock = (recipients[0].maturity * 2 * 60);
                 if(calcBlock < recipients[0].locktime) {
                     recipientElement.append("This transaction will likely mature based on confirmations.");
                 } else {
                     recipientElement.append("This transaction will likely mature based on time.");
                 }
-            } else if(recipients[0].maturity <= 0 && recipients[0].locktime <= 0){
+            } else if(recipients[0].maturity < 0 && recipients[0].locktime < 0){
                 recipientElement.append("<span style='" + GUIUtil::getThemedStyleQString(GUIUtil::ThemedStyle::TS_ERROR) + "'><b>No maturity is set. Transaction will mature as normal.</b></span>");
             }
         }
@@ -518,7 +519,8 @@ SendCoinsEntry *SendCoinsDialog::addEntry()
 {
 
     SendCoinsEntry* entry = new SendCoinsEntry(this, sporkManager.IsSporkActive(SPORK_22_SPECIAL_TX_FEE)
-                                                                            && ui->entries->count() != 0);
+                                                            && Params().IsFutureActive(chainActive.Tip())
+                                                            && ui->entries->count() == 0);
     entry->setModel(model);
     ui->entries->addWidget(entry);
     connect(entry, SIGNAL(removeEntry(SendCoinsEntry*)), this, SLOT(removeEntry(SendCoinsEntry*)));
@@ -691,6 +693,9 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
         msgParams.first = tr("Payment request expired.");
         msgParams.second = CClientUIInterface::MSG_ERROR;
         break;
+    case WalletModel::AmountExceedsmaxmoney:
+        msgParams.first = tr("The amount to pay exceeds the limit of 21 million per transaction.");
+        break;    
     // included to prevent a compiler warning.
     case WalletModel::OK:
     default:

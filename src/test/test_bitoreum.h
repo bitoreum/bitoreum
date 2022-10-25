@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_TEST_TEST_BITOREUM_H
-#define BITCOIN_TEST_TEST_BITOREUM_H
+#ifndef BITCOIN_TEST_TEST__B_I_T_O_R_E_U_M__H
+#define BITCOIN_TEST_TEST__B_I_T_O_R_E_U_M__H
 
 #include <chainparamsbase.h>
 #include <fs.h>

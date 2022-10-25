@@ -43,8 +43,8 @@
 
 // Uncomment the following line to enable debugging messages
 // or enable on a per file basis prior to inclusion of util.h
-//#define ENABLE_BITOREUM_DEBUG
-#ifdef ENABLE_BITOREUM_DEBUG
+//#define ENABLE__B_I_T_O_R_E_U_M__DEBUG
+#ifdef ENABLE__B_I_T_O_R_E_U_M__DEBUG
 #define DBG( x ) x
 #else
 #define DBG( x )
@@ -59,7 +59,8 @@ extern int nWalletBackups;
 // Application startup time (used for uptime calculation)
 int64_t GetStartupTime();
 
-static const int DEFAULT_POW_CACHE_SIZE = 150000;
+static const int DEFAULT_POW_CACHE_SIZE = 1000000;
+static const int DEFAULT_MAX_LOAD_SIZE = 720;
 
 /** Signals for translation. */
 class CTranslationInterface
@@ -110,7 +111,7 @@ void ReleaseDirectoryLocks();
 
 bool TryCreateDirectories(const fs::path& p);
 fs::path GetDefaultDataDir();
-const fs::path &GetBlocksDir(bool fNetSpecific = true);
+const fs::path &GetBlocksDir();
 const fs::path &GetDataDir(bool fNetSpecific = true);
 fs::path GetBackupsDir();
 void ClearDatadirCache();

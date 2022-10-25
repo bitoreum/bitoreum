@@ -1,8 +1,8 @@
 // Copyright (c) 2014-2019 The Dash Core developers
 // Copyright (c) 2020-2022 The Bitoreum developers
 // Distributed under the MIT software license, see the accompanying
-#ifndef BITOREUM_HDCHAIN_H
-#define BITOREUM_HDCHAIN_H
+#ifndef _B_I_T_O_R_E_U_M__HDCHAIN_H
+#define _B_I_T_O_R_E_U_M__HDCHAIN_H
 
 #include <key.h>
 #include <sync.h>
@@ -148,4 +148,4 @@ public:
     std::string GetKeyPath() const;
 };
 
-#endif // BITOREUM_HDCHAIN_H
+#endif // _B_I_T_O_R_E_U_M__HDCHAIN_H

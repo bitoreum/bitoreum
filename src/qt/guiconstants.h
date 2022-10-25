@@ -10,6 +10,9 @@
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 250;
 
+/* Milliseconds between model updates while sync */
+static const int MODEL_UPDATE_DELAY_SYNC = 10000;
+
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
@@ -43,7 +46,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Bitoreum"
-#define QAPP_ORG_DOMAIN "bitoreum.org"
+#define QAPP_ORG_DOMAIN "bitoreum.com"
 #define QAPP_APP_NAME_DEFAULT "Bitoreum-Qt"
 #define QAPP_APP_NAME_TESTNET "Bitoreum-Qt-testnet"
 #define QAPP_APP_NAME_DEVNET "Bitoreum-Qt-%s"

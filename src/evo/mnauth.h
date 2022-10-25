@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITOREUM_MNAUTH_H
-#define BITOREUM_MNAUTH_H
+#ifndef _B_I_T_O_R_E_U_M__MNAUTH_H
+#define _B_I_T_O_R_E_U_M__MNAUTH_H
 
 #include <bls/bls.h>
 #include <serialize.h>
@@ -56,4 +56,4 @@ public:
 };
 
 
-#endif //BITOREUM_MNAUTH_H
+#endif //_B_I_T_O_R_E_U_M__MNAUTH_H

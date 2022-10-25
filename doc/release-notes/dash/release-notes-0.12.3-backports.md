@@ -522,7 +522,7 @@
 - [`0dfb93450`](https://github.com/bitoreum/bitoreum/commit/0dfb93450) Merge #8783: [share] remove qt/protobuf.pri
 - [`24c69691c`](https://github.com/bitoreum/bitoreum/commit/24c69691c) Merge #8781: [contrib] delete qt_translations.py
 - [`97b63420d`](https://github.com/bitoreum/bitoreum/commit/97b63420d) Merge #8656: Trivial: Do not shadow global variable fileout
-- [`bfa539a1d`](https://github.com/bitoreum/bitoreum/commit/bfa539a1d) Merge #8170: [qt] WalletModel: Expose disablewallet
+- [`bfa539a1d`](https://github.com/bitoreum/bitoreum/commit/bfa539a1d) Merge #8777: [qt] WalletModel: Expose disablewallet
 - [`bd9449c00`](https://github.com/bitoreum/bitoreum/commit/bd9449c00) Merge #8773: Trivial Bugfix: doc/gitian-building.md: Link to release-process needs to be updated
 - [`06f41f358`](https://github.com/bitoreum/bitoreum/commit/06f41f358) Merge #8768: init: Get rid of fDisableWallet
 - [`ac3fdd3d2`](https://github.com/bitoreum/bitoreum/commit/ac3fdd3d2) Merge #8769: Trivial: Fix ISO URL, capitalization

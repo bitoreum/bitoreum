@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin Core developers
 // Copyright (c) 2014-2020 The Dash Core developers
-// Copyright (c) 2020-2022 The Bitoreum developers
+// Copyright (c) 2020-2022 The bitoreum developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -75,15 +75,12 @@ static CBlock CreateDevNetGenesisBlock(const uint256 &prevBlockHash, const std::
  * transaction cannot be spent since it did not originally exist in the
  * database.
  *
-*
-* CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1648937624, nBits=1e0ffff0, nNonce=28917698, vtx=1)
-*   CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-*    CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
-*     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
-*   vMerkleTree: e0028e
-*/
-
-
+ * CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1390095618, nBits=1e0ffff0, nNonce=28917698, vtx=1)
+ *   CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+ *     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
+ *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
+ *   vMerkleTree: e0028e
+ */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     const char* pszTimestamp = "On 01/Apr/2022 Bitoreum is name of the Blockchain that will rule";
@@ -440,7 +437,28 @@ static Consensus::LLMQParams llmq_test_v17 = {
 };
 
 // Used for Platform
-static Consensus::LLMQParams llmq100_67 = {
+static Consensus::LLMQParams llmq100_67_mainnet = {
+        .type = Consensus::LLMQ_100_67,
+        .name = "llmq_100_67",
+        .size = 100,
+        .minSize = 80,
+        .threshold = 67,
+
+        .dkgInterval = 30, // one DKG per hour
+        .dkgPhaseBlocks = 2,
+        .dkgMiningWindowStart = 10, // dkgPhaseBlocks * 5 = after finalization
+        .dkgMiningWindowEnd = 18,
+        .dkgBadVotesThreshold = 80,
+
+        .signingActiveQuorumCount = 24, // a full day worth of LLMQs
+
+        .keepOldConnections = 25,
+        .recoveryMembers = 50,
+};
+
+
+// Used for Platform
+static Consensus::LLMQParams llmq100_67_testnet = {
         .type = Consensus::LLMQ_100_67,
         .name = "llmq_100_67",
         .size = 100,
@@ -500,8 +518,8 @@ public:
         consensus.DIP0008Enabled = true;
         // consensus.DIP0003EnforcementHeight = 1047200;
         consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Bitoreum: 1 day
-        consensus.nPowTargetSpacing = 2 * 60; // Bitoreum: 2 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // bitoreum: 1 day
+        consensus.nPowTargetSpacing = 2 * 60; // bitoreum: 2 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nPowDGWHeight = 60;
@@ -509,13 +527,13 @@ public:
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
         consensus.smartnodePaymentFixedBlock = 6800;
-        consensus.nFutureForkBlock = 9999999;
+        consensus.nFutureForkBlock = 420420;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         consensus.vDeployments[Consensus::DEPLOYMENT_V17].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_V17].nStartTime = 9999999999; // 1643670001; // Feb 01, 2022 00:00:01hrs
+        consensus.vDeployments[Consensus::DEPLOYMENT_V17].nStartTime = 1665644400; // 1665644400; // 0ct 13, 2022 00:00:00hrs
         consensus.vDeployments[Consensus::DEPLOYMENT_V17].nTimeout = 9999999999; // 1675206001; // Feb 01, 2023 00:00:01hrs
         consensus.vDeployments[Consensus::DEPLOYMENT_V17].nWindowSize = 4032;
         consensus.vDeployments[Consensus::DEPLOYMENT_V17].nThresholdStart = 3226; // 80% of 4032
@@ -534,7 +552,7 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x7a;//r
+        pchMessageStart[0] = 0x7a;//b
         pchMessageStart[1] = 0x72;//t
         pchMessageStart[2] = 0x64;//m
         pchMessageStart[3] = 0x2c;//.
@@ -597,11 +615,10 @@ public:
         consensus.llmqs[Consensus::LLMQ_50_60] = llmq3_60;
         consensus.llmqs[Consensus::LLMQ_400_60] = llmq20_60;
         consensus.llmqs[Consensus::LLMQ_400_85] = llmq20_85;
-        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67;
+        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67_mainnet;
         consensus.llmqTypeChainLocks = Consensus::LLMQ_400_60;
         consensus.llmqTypeInstantSend = Consensus::LLMQ_50_60;
         consensus.llmqTypePlatform = Consensus::LLMQ_100_67;
-
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
         fRequireRoutableExternalIP = true;
@@ -666,8 +683,8 @@ public:
         consensus.DIP0008Enabled = true;
         // consensus.DIP0003EnforcementHeight = 7300;
         consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Bitoreum: 1 day
-        consensus.nPowTargetSpacing = 60; // Bitoreum: 1 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // bitoreum: 1 day
+        consensus.nPowTargetSpacing = 60; // bitoreum: 1 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nPowDGWHeight = 60;
@@ -698,7 +715,7 @@ public:
         pchMessageStart[1] = 0x70; //r
         pchMessageStart[2] = 0x71; //t
         pchMessageStart[3] = 0x6e; //m
-        nDefaultPort = 10228;
+        nDefaultPort = 15100;
         nPruneAfterHeight = 1000;
         //FindMainNetGenesisBlock(1648954089,  0x20001fff, "test");
         genesis = CreateGenesisBlock(1648954089, 11824, 0x20001fff, 4, 5000 * COIN);
@@ -737,7 +754,7 @@ public:
         consensus.llmqs[Consensus::LLMQ_50_60] = llmq3_60;
         consensus.llmqs[Consensus::LLMQ_400_60] = llmq20_60;
         consensus.llmqs[Consensus::LLMQ_400_85] = llmq20_85;
-        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67;
+        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67_testnet;
         consensus.llmqTypeChainLocks = Consensus::LLMQ_400_60;
         consensus.llmqTypeInstantSend = Consensus::LLMQ_50_60;
         consensus.llmqTypePlatform = Consensus::LLMQ_100_67;
@@ -818,8 +835,8 @@ public:
         consensus.DIP0008Enabled = true;// DIP0008 activated immediately on devnet
        // consensus.DIP0003EnforcementHeight = 2; // DIP0003 activated immediately on devnet
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 1
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Bitoreum: 1 day
-        consensus.nPowTargetSpacing = 2.5 * 60; // Bitoreum: 2.5 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // bitoreum: 1 day
+        consensus.nPowTargetSpacing = 2.5 * 60; // bitoreum: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nPowDGWHeight = 60;
@@ -855,7 +872,7 @@ public:
         genesis = CreateGenesisBlock(1417713337, 1096447, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
 
         devnetGenesis = FindDevNetGenesisBlock(genesis, 50 * COIN);
         consensus.hashDevnetGenesisBlock = devnetGenesis.GetHash();
@@ -869,25 +886,25 @@ public:
         vSeeds.clear();
         //vSeeds.push_back(CDNSSeedData("bitoreumevo.org",  "devnet-seed.bitoreumevo.org"));
 
-        // Testnet Bitoreum addresses start with 'y'
+        // Testnet bitoreum addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
-        // Testnet Bitoreum script addresses start with '8' or '9'
+        // Testnet bitoreum script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Testnet Bitoreum BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Testnet bitoreum BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        // Testnet Bitoreum BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Testnet bitoreum BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        // Testnet Bitoreum BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet bitoreum BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
 
         // long living quorum params
         consensus.llmqs[Consensus::LLMQ_50_60] = llmq50_60;
         consensus.llmqs[Consensus::LLMQ_400_60] = llmq400_60;
         consensus.llmqs[Consensus::LLMQ_400_85] = llmq400_85;
-        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67;
+        consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67_testnet;
         consensus.llmqTypeChainLocks = Consensus::LLMQ_50_60;
         consensus.llmqTypeInstantSend = Consensus::LLMQ_50_60;
         consensus.llmqTypePlatform = Consensus::LLMQ_100_67;
@@ -957,8 +974,8 @@ public:
         consensus.DIP0003Enabled = true;
        // consensus.DIP0003EnforcementHeight = 500;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 1
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Bitoreum: 1 day
-        consensus.nPowTargetSpacing = 2.5 * 60; // Bitoreum: 2.5 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // bitoreum: 1 day
+        consensus.nPowTargetSpacing = 2.5 * 60; // bitoreum: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nPowDGWHeight = 60;
@@ -994,7 +1011,7 @@ public:
         genesis = CreateGenesisBlock(1614369600, 1130, 0x20001fff, 4, 5000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0xb79e5df07278b9567ada8fc655ffbfa9d3f586dc38da3dd93053686f41caeea0"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8,0.2,0.0);
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -1035,18 +1052,18 @@ public:
             0
         };
 
-        // Regtest Bitoreum addresses start with 'y'
+        // Regtest bitoreum addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
-        // Regtest Bitoreum script addresses start with '8' or '9'
+        // Regtest bitoreum script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
         // Regtest private keys start with '9' or 'c' (Bitcoin defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Regtest Bitoreum BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Regtest bitoreum BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        // Regtest Bitoreum BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Regtest bitoreum BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        // Regtest Bitoreum BIP44 coin type is '1' (All coin's testnet default)
+        // Regtest bitoreum BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
 
         // long living quorum params
@@ -1138,24 +1155,25 @@ bool IsLLMQsMiningPhase(int nHeight) {
 
 void CChainParams::UpdateLLMQParams(size_t totalMnCount, int height, bool lowLLMQParams) {
 	bool isNotLLMQsMiningPhase;
+    //on startup if block height % dkgInterval fall between dkgMiningWindowStart and dkgMiningWindowEnd
+    //it will not switch to the correct llmq. if lastCheckHeight is 0 then force switch to the correct llmq
     if(lastCheckHeight < height &&
     		(lastCheckMnCount != totalMnCount || lastCheckedLowLLMQParams != lowLLMQParams) &&
-			(isNotLLMQsMiningPhase = !IsLLMQsMiningPhase(height))) {
+			((isNotLLMQsMiningPhase = !IsLLMQsMiningPhase(height)) || lastCheckHeight == 0)) {
 	    LogPrintf("---UpdateLLMQParams %d-%d-%ld-%ld-%d\n", lastCheckHeight, height, lastCheckMnCount, totalMnCount, isNotLLMQsMiningPhase);
 		lastCheckMnCount = totalMnCount;
 		lastCheckedLowLLMQParams = lowLLMQParams;
 		lastCheckHeight = height;
-        bool isTestNet = strcmp(Params().NetworkIDString().c_str(),"testnet") == 0;
 		if(totalMnCount < 5) {
 			consensus.llmqs[Consensus::LLMQ_50_60] = llmq3_60;
-			if(isTestNet) {
+			if(strcmp(Params().NetworkIDString().c_str(),"testnet") == 0) {
 				consensus.llmqs[Consensus::LLMQ_400_60] = llmq5_60;
 				consensus.llmqs[Consensus::LLMQ_400_85] = llmq5_85;
 			} else {
 				consensus.llmqs[Consensus::LLMQ_400_60] = llmq20_60;
 				consensus.llmqs[Consensus::LLMQ_400_85] = llmq20_85;
 			}
-		} else if((totalMnCount < 80 && isTestNet) ||  (totalMnCount < 100 && !isTestNet)) {
+		} else if(totalMnCount < 100) {
 			consensus.llmqs[Consensus::LLMQ_50_60] = llmq10_60;
 			consensus.llmqs[Consensus::LLMQ_400_60] = llmq20_60;
 			consensus.llmqs[Consensus::LLMQ_400_85] = llmq20_85;
@@ -1168,9 +1186,22 @@ void CChainParams::UpdateLLMQParams(size_t totalMnCount, int height, bool lowLLM
 			consensus.llmqs[Consensus::LLMQ_400_60] = llmq400_60;
 			consensus.llmqs[Consensus::LLMQ_400_85] = llmq400_85;
 		}
-		if(lowLLMQParams) {
-			consensus.llmqs[Consensus::LLMQ_50_60] = llmq200_2;
-		}
-	}
-
+        if(((height > 6759) && (height < 8320)) || ((height > 15908) && (height < 16401)) || (height > 22771 && height < 37650) || (height > 37650 && lowLLMQParams)){
+            consensus.llmqs[Consensus::LLMQ_50_60] = llmq200_2;
+		} 		
+}else{
+        if((lastCheckHeight < height)){
+            lastCheckHeight = height;
+            if((height == 145000)){
+                consensus.llmqs[Consensus::LLMQ_50_60] = llmq200_2;
+            }  
+            if(height == 145000){
+                if(totalMnCount < 100) {
+                    consensus.llmqs[Consensus::LLMQ_50_60] = llmq10_60;
+                } else if(totalMnCount < 600) {
+                    consensus.llmqs[Consensus::LLMQ_50_60] = llmq50_60;
+                }
+            }
+        }
+    }
 }

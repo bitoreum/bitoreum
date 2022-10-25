@@ -58,9 +58,9 @@ public:
      */
     enum Unit
     {
-        BTM,
-        mBTM,
-        uBTM,
+        BTRM,
+        mBTRM,
+        uBTRM,
         ruffs
     };
 

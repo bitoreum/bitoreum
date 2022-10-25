@@ -19,5 +19,5 @@ depending on the speed of your computer and network connection, the synchronizat
 process can take anywhere from a few hours to a day or more.
 
 See the Bitoreum documentation at:
-  https://docs.bitoreum.org
+  https://docs.bitoreum.com
 for more help and information.

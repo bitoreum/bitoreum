@@ -455,7 +455,7 @@
             <item row="2" column="1">
              <widget class="QLabel" name="labelAnonymized">
               <property name="text">
-               <string notr="true">0 BITOREUM</string>
+               <string notr="true">0 _B_I_T_O_R_E_U_M_</string>
               </property>
              </widget>
             </item>
@@ -469,7 +469,7 @@
             <item row="3" column="1">
              <widget class="QLabel" name="labelAmountRounds">
               <property name="text">
-               <string>0 BITOREUM / 0 Rounds</string>
+               <string notr="true">0 _B_I_T_O_R_E_U_M_ / 0 Rounds</string>
               </property>
              </widget>
             </item>

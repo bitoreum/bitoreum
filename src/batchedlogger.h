@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITOREUM_BATCHEDLOGGER_H
-#define BITOREUM_BATCHEDLOGGER_H
+#ifndef _B_I_T_O_R_E_U_M__BATCHEDLOGGER_H
+#define _B_I_T_O_R_E_U_M__BATCHEDLOGGER_H
 
 #include "tinyformat.h"
 
@@ -30,4 +30,4 @@ public:
     void Flush();
 };
 
-#endif//BITOREUM_BATCHEDLOGGER_H
+#endif//_B_I_T_O_R_E_U_M__BATCHEDLOGGER_H

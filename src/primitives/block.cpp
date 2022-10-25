@@ -11,10 +11,6 @@
 #include <util.h>
 #include <utilstrencodings.h>
 
-static CCriticalSection cs_pow;
-
-extern "C" { extern sph_u32 T512_8[256][16]; };
-
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);
@@ -22,30 +18,18 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::ComputeHash() const
 {
-	if ( nTime > 1650614401 )
-	{
-		T512_8[115][10] = SPH_C32(0x87770000);
-		T512_8[145][2] = SPH_C32(0x87770000);
-
-	}
-	else
-	{
-		T512_8[115][10] = SPH_C32(0x81700000);
-		T512_8[145][2] = SPH_C32(0x81700000);
-	}
-	
     return HashGR(BEGIN(nVersion), END(nNonce), hashPrevBlock);
 }
 
 uint256 CBlockHeader::GetPOWHash(bool readCache) const
 {
+    LOCK(cs_pow);
     CPowCache& cache(CPowCache::Instance());
 
     uint256 headerHash = GetHash();
     uint256 powHash;
     bool found = false;
 
-    LOCK(cs_pow);
     if (readCache) {
         found = cache.get(headerHash, powHash);
     }

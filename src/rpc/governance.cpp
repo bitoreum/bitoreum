@@ -167,7 +167,7 @@ UniValue gobject_prepare(const JSONRPCRequest& request)
 
     CGovernanceObject govobj(hashParent, nRevision, nTime, uint256(), strDataHex);
 
-    // This command is dangerous because it consumes 5 BITOREUM irreversibly.
+    // This command is dangerous because it consumes 5 _B_I_T_O_R_E_U_M_ irreversibly.
     // If params are lost, it's very hard to bruteforce them and yet
     // users ignore all instructions on bitoreumcentral etc. and do not save them...
     // Let's log them here and hope users do not mess with debug.log

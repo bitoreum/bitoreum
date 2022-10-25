@@ -17,7 +17,7 @@ fi
 SAPLING_SPEND_NAME='sapling-spend.params'
 SAPLING_OUTPUT_NAME='sapling-output.params'
 SAPLING_SPROUT_GROTH16_NAME='sprout-groth16.params'
-DOWNLOAD_URL="https://github.com/Raptor3um/bitoreum/releases/tag/1.2.15.3"
+DOWNLOAD_URL="https://github.com/bitoreum/bitoreum/releases/tag/1.2.15.3"
 #IPFS_HASH="/ipfs/QmXRHVGLQBiKwvNq7c2vPxAKz1zRVmMYbmt7G5TQss7tY7"
 
 SHA256CMD="$(command -v sha256sum || echo shasum)"
@@ -27,15 +27,15 @@ WGETCMD="$(command -v wget || echo '')"
 IPFSCMD="$(command -v ipfs || echo '')"
 CURLCMD="$(command -v curl || echo '')"
 
-# fetch methods can be disabled with BTM_DISABLE_SOMETHING=1
-BTM_DISABLE_WGET="${BTM_DISABLE_WGET:-}"
-#BTM_DISABLE_IPFS="${BTM_DISABLE_IPFS:-}"
-BTM_DISABLE_CURL="${BTM_DISABLE_CURL:-}"
+# fetch methods can be disabled with RTM_DISABLE_SOMETHING=1
+RTM_DISABLE_WGET="${RTM_DISABLE_WGET:-}"
+#RTM_DISABLE_IPFS="${RTM_DISABLE_IPFS:-}"
+RTM_DISABLE_CURL="${RTM_DISABLE_CURL:-}"
 
 LOCKFILE=/tmp/fetch_params.lock
 
 fetch_wget() {
-    if [ -z "$WGETCMD" ] || ! [ -z "$BTM_DISABLE_WGET" ]; then
+    if [ -z "$WGETCMD" ] || ! [ -z "$RTM_DISABLE_WGET" ]; then
         return 1
     fi
 
@@ -53,7 +53,7 @@ EOF
 }
 
 #fetch_ipfs() {
-#    if [ -z "$IPFSCMD" ] || ! [ -z "$BTM_DISABLE_IPFS" ]; then
+#    if [ -z "$IPFSCMD" ] || ! [ -z "$RTM_DISABLE_IPFS" ]; then
 #        return 1
 #    fi
 
@@ -66,7 +66,7 @@ EOF
 #}
 
 fetch_curl() {
-    if [ -z "$CURLCMD" ] || ! [ -z "$BTM_DISABLE_CURL" ]; then
+    if [ -z "$CURLCMD" ] || ! [ -z "$RTM_DISABLE_CURL" ]; then
         return 1
     fi
 
@@ -176,7 +176,7 @@ main() {
     || exit_locked_error
 
     cat <<EOF
-BTM - fetch-params.sh
+RTM - fetch-params.sh
 
 This script will fetch the Bitoreum SNARK parameters and verify their
 integrity with sha256sum.

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITOREUM_CRYPTO_BLS_H
-#define BITOREUM_CRYPTO_BLS_H
+#ifndef _B_I_T_O_R_E_U_M__CRYPTO_BLS_H
+#define _B_I_T_O_R_E_U_M__CRYPTO_BLS_H
 
 #include <hash.h>
 #include <serialize.h>
@@ -449,4 +449,4 @@ typedef std::shared_ptr<BLSSignatureVector> BLSSignatureVectorPtr;
 
 bool BLSInit();
 
-#endif // BITOREUM_CRYPTO_BLS_H
+#endif // _B_I_T_O_R_E_U_M__CRYPTO_BLS_H
