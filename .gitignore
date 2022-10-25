@@ -146,6 +146,7 @@ depends/x86_64-pc-linux-gnu
 depends/sdk-sources/
 dist/
 *.conf
+!depends/patches/qt/mac-qmake.conf
 .settings/language.settings.xml
 
 /bitoreum.iml
