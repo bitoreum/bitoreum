@@ -35,7 +35,7 @@ jobs:
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v2
       with:
-        images: dashpay/dashd
+        images: bitoreum/bitoreumd
         tags: |
           type=match,pattern=v(\d+.\d+.\d+.\d+),group=1,enable=${{ !contains(github.event.release.tag_name, '-rc') }}
           type=match,pattern=v(\d+.\d+.\d+),group=1,enable=${{ !contains(github.event.release.tag_name, '-rc') }}
