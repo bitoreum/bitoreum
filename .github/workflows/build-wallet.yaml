@@ -168,7 +168,7 @@ jobs:
         with:
           name: ${{ env.COIN_NAME }}-ubuntu20-${{ env.BUILD_VERSION }}
           path: ${{ env.COMPRESS_DIR }}
-            build-ubuntu20:
+    build-ubuntu20:
     name: Ubuntu22 build
     needs: checking-build-version
     runs-on: ubuntu-22.04
